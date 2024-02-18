@@ -10,7 +10,8 @@ class JournalsController < ApplicationController
 	end
 
 	def create
-		journal = Journal.create(journal_params)
+		journal = Journal.create({title: journal_params[:title], content: journal_params[:content]})
+
 		render json: journal
 	end
 
