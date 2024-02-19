@@ -10,7 +10,7 @@ class JournalsController < ApplicationController
 	end
 
 	def create
-		journal = Journal.create({title: journal_params[:title], content: journal_params[:content]})
+		journal = Journal.create({content: journal_params[:content]})
 
 		render json: journal
 	end
@@ -30,6 +30,6 @@ class JournalsController < ApplicationController
 	private
 
 	def journal_params
-		params.permit(:title, :content)
+		params.permit(:content)
 	end
 end
