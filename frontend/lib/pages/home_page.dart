@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 var lists = [];
+const apiHost = 'http://192.168.3.6:3000';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,10 +17,10 @@ class _HomePageState extends State<HomePage> {
   List journals = [];
 
   Future<void> getJournals() async {
-    var url = Uri.parse("http://localhost:3000/journals");
-    var response = await http.get(url);
-    var jsonResponse = jsonDecode(response.body);
+    var url = Uri.parse(apiHost+"/journals");
 
+   var response = await http.get(url);
+   var jsonResponse = jsonDecode(response.body);
     setState(() {
       journals = jsonResponse;
     });
@@ -69,9 +70,9 @@ class _HomePageState extends State<HomePage> {
       MaterialPageRoute(builder: (context) => AddPage()),
     );
 
-    if (result) {
+    // if (result) {
       getJournals();
-    }
+    // }
   }
 }
 
@@ -105,7 +106,7 @@ class AddPage extends StatelessWidget  {
 }
 
 void addJournal(BuildContext context, String content) async {
-  var url = Uri.parse("http://localhost:3000/journals");
+  var url = Uri.parse(apiHost+"/journals");
   var response = await http.post(url, body: {
     "content": content
   });
